@@ -46,6 +46,25 @@ The body:
   Compare two photos side by side or with a slider. Photos are re-saved, which drops location
   and camera details.
 
+Exercise:
+
+- An Exercise page. A readiness check (built on the ACSM 2015 screening steps) comes first; with
+  a heart, diabetes or kidney condition, or warning signs, the plan stays gentlest until you
+  record that a clinician has cleared you.
+- A weekly plan from about 74 exercises needing no gym: body weight, a chair, a wall, stairs and
+  a pair of hand weights. Moving, strength, balance, stretching, and optional yoga and breathing
+  from the Common Yoga Protocol. Exercises rotate every four weeks.
+- Safety rules read conditions, operations (the last 12 weeks), medicines, recent symptoms and
+  blood pressure, and leave out or soften exercises, each with why and a cited source. Chest pain
+  or very high blood pressure pauses the plan. Conditions the rules do not cover are listed. You
+  can put back an exercise your team cleared.
+- Log each session: done with effort and pain from 0 to 10, or skipped with a reason. The next
+  morning asks about pain once. A weekly review suggests more, less or a swap, using the
+  pain-monitoring model; nothing changes until you accept.
+- The week is compared with the UK Chief Medical Officers' guidelines. Ayurveda notes are
+  optional, labelled as traditional, and never choose exercises.
+- The Body page shows the exercise rules for the part you tap.
+
 ## [0.1.0]
 
 The first release (alpha). Installers for Windows, Linux and Android.

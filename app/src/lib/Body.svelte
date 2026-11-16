@@ -4,6 +4,7 @@
   import { Card, Pill } from '@swasthya/ui'
   import { api } from './api.ts'
   import { byRegion, firstYear, labelOf, place, regionsOfSite, type Tone } from './model/body.ts'
+  import { evaluate, factsFrom, hitsFor } from './model/exrules.ts'
   import { condition, kindOf, procedure, type Resource } from './model/fhir.ts'
   import { isBodyPhoto, siteOf } from './model/photo.ts'
   import { session } from './session.svelte.ts'
@@ -34,6 +35,7 @@
   const gender = $derived(String(session.person?.gender ?? ''))
   const hidden = $derived(gender === 'female' ? ['prostate'] : gender === 'male' ? ['uterus', 'ovary-r', 'ovary-l'] : [])
   const here = $derived(selected ? regions.get(selected) : undefined)
+  const exerciseHere = $derived(here ? hitsFor(evaluate(factsFrom(records, session.person)), here.items.map((p) => p.record)) : [])
   const photosHere = $derived(selected ? photos.filter((p) => regionsOfSite(siteOf(p)).includes(selected!)).length : 0)
 
   const TONES: [Tone, string][] = [
@@ -86,6 +88,15 @@
           </ul>
         {:else}
           <p class="muted">Nothing recorded here{year < thisYear ? ` as of ${year}` : ''}.</p>
+        {/if}
+        {#if exerciseHere.length}
+          <div class="exercise">
+            <p class="small"><strong>Exercise</strong></p>
+            <ul class="plain small">
+              {#each exerciseHere as h (h.rule.id + h.because)}<li><strong>{h.rule.title}:</strong> {h.rule.why}</li>{/each}
+            </ul>
+            <p class="small"><a href="#/exercise">Open the exercise plan</a></p>
+          </div>
         {/if}
         <p><a href="#/records">Open Records</a>{#if photosHere} · <a href="#/photos">{photosHere} {photosHere === 1 ? 'photo' : 'photos'} of this part</a>{/if}</p>
       </Card>
@@ -146,4 +157,6 @@
   .link { font: inherit; color: var(--c-accent); background: none; border: 0; cursor: pointer; padding: 0; }
   .gap { height: 18px; }
   .credit { margin-top: 12px; }
+  .exercise { border-top: 1px solid var(--c-line); margin-top: 12px; padding-top: 8px; }
+  .exercise p { margin: 4px 0; }
 </style>

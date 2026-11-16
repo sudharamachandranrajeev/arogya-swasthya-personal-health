@@ -62,6 +62,13 @@ Status: **alpha**. The records screens, backups and updates work; the features l
 - 🧍 **Your body in 3D** – conditions and operations light up on a 3D body you can turn and
   zoom, coloured by whether they are active, come and go, or are over. Slide back through the
   years to see the body as it was. Tap a part to see its records.
+- 🏃 **Exercise that fits you** – a few safety questions first, then a weekly plan with no gym
+  needed: body weight, a chair, a wall, stairs and a pair of hand weights. It leaves out moves
+  your conditions, operations and medicines make unwise, and says why with a link to the
+  guidance. Mark each exercise done or skipped, rate effort and pain, and a weekly review
+  suggests a little more or easing off. Yoga from India's Common Yoga Protocol is optional, as
+  are Ayurveda notes, which are labelled as traditional advice. It never says you are cleared
+  to exercise.
 - 📷 **Photo series** – photograph a mole, rash or scar the same way each time. The camera shows
   the last photo faintly as a guide, the app points out blur or different light, and you compare
   two photos side by side or with a slider. The app does not judge what a photo shows; take
@@ -81,8 +88,7 @@ Status: **alpha**. The records screens, backups and updates work; the features l
 - 🎨 **Three looks, light or dark** – Sage, Aurora and Journal, a calm mode with less motion,
   or make your own.
 
-Coming in later versions: finding care near you, exercise plans, care plans and optional AI
-help.
+Coming in later versions: finding care near you, care plans and optional AI help.
 
 ## 📸 Screenshots
 
@@ -201,6 +207,17 @@ flowchart LR
 > key is the only way to open your records or your backups. Nobody can reset it.
 
 ## ❓ FAQ and troubleshooting
+
+<details>
+<summary><b>Is the exercise plan safe for me?</b></summary>
+
+The plan follows fixed rules from published guidance (NHS, NICE, the UK Chief Medical Officers,
+the American College of Sports Medicine and others). Each rule names its source on the Safety
+tab. The rules only leave exercises out or make them gentler; they cannot say you are fit to
+exercise. If the readiness questions say to ask first, or your record has a condition the rules
+do not cover, check with your doctor, nurse or physiotherapist. Stop and get help if you have
+chest pain, feel faint or are very short of breath.
+</details>
 
 <details>
 <summary><b>I forgot my PIN</b></summary>
@@ -368,6 +385,10 @@ will not see it.
   shared under CC BY-SA 4.0 (see `app/public/anatomy/LICENSE.md`). Drawn with
   [three.js](https://threejs.org), shrunk with [glTF Transform](https://gltf-transform.dev) and
   [meshoptimizer](https://github.com/zeux/meshoptimizer)
+- Exercise steps are written for this app, following [NHS Live Well](https://www.nhs.uk/live-well/exercise/)
+  guidance (Open Government Licence v3.0), the US National Institute on Aging's exercise guide,
+  and the [Common Yoga Protocol](https://yoga.ayush.gov.in/) of India's Ministry of AYUSH. Each
+  exercise and safety rule names its source in the app
 - [Lucide](https://lucide.dev) icons
 - [Inter](https://rsms.me/inter/), [Fraunces](https://github.com/undercasetype/Fraunces),
   [Space Grotesk](https://github.com/floriankarsten/space-grotesk) and

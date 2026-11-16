@@ -68,8 +68,8 @@ test('check explains missing, malformed and future values', () => {
 })
 
 test('every kind has a summary and a required first field', () => {
-  // Vital signs have their own form (Vitals.svelte).
-  for (const k of kinds.filter((k) => k !== vital)) {
+  // Vital signs and exercise sessions have their own forms.
+  for (const k of kinds.filter((k) => k.fields.length)) {
     assert.ok(k.fields[0].required, k.type)
     assert.equal(typeof k.summary(toFhir(k, { name: 'x' }, 'p')).title, 'string')
   }

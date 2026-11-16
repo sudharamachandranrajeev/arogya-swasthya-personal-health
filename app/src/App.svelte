@@ -23,6 +23,7 @@
   import Calculators from './lib/Calculators.svelte'
   import Documents from './lib/Documents.svelte'
   import Doses from './lib/Doses.svelte'
+  import Exercise from './lib/Exercise.svelte'
   import Home from './lib/Home.svelte'
   import Import from './lib/Import.svelte'
   import Lock from './lib/Lock.svelte'
@@ -65,7 +66,6 @@
   ]
   const later: Record<string, string> = {
     care: 'Finding care near you, with every source checked and shown.',
-    exercise: 'Exercise plans that respect your injuries and conditions.',
     plan: 'A care plan for life: screenings, vaccines and follow-ups.',
   }
 
@@ -144,6 +144,10 @@
           <h1>Body</h1>
           <p class="lead">Where {session.personName}'s conditions and operations are. Drag to turn, pinch or scroll to zoom, tap a part to see its records.</p>
           <Body />
+        {:else if page === 'exercise'}
+          <h1>Exercise</h1>
+          <p class="lead">A plan for {session.personName} that fits their conditions, operations and medicines, with no gym needed.</p>
+          <Exercise />
         {:else if page === 'photos'}
           <h1>Photos</h1>
           <p class="lead">Photos of one part of {session.personName}'s body over time, taken the same way each time so they compare.</p>

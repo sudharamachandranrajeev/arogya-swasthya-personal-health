@@ -288,6 +288,8 @@ const DATES: Record<string, string[]> = {
   Procedure: ['performedDateTime'],
   Immunization: ['occurrenceDateTime'],
   Observation: ['effectiveDateTime'],
+  CarePlan: ['period.start', 'created'],
+  QuestionnaireResponse: ['authored'],
 }
 const dateOf = (r: Resource) =>
   (DATES[r.resourceType] ?? [])

@@ -15,6 +15,8 @@ const KINDS: &[(&str, &str)] = &[
     ("Observation", "subject"),
     ("DiagnosticReport", "subject"),
     ("DocumentReference", "subject"),
+    ("CarePlan", "subject"),
+    ("QuestionnaireResponse", "subject"),
 ];
 
 /// Where each type keeps the date that orders it on the timeline, first match wins.
@@ -39,6 +41,8 @@ const DATES: &[(&str, &[&str])] = &[
         &["effectiveDateTime", "effectivePeriod.start", "issued"],
     ),
     ("DocumentReference", &["context.period.start", "date"]),
+    ("CarePlan", &["period.start", "created"]),
+    ("QuestionnaireResponse", &["authored"]),
 ];
 
 #[derive(Debug, thiserror::Error, PartialEq, Eq)]
@@ -119,6 +123,11 @@ mod tests {
         assert_eq!(person_of(&i).unwrap().as_deref(), Some("p1"));
         let m = json!({"resourceType": "MedicationStatement", "subject": {"reference": "Patient/p1"}, "effectivePeriod": {"start": "2023-01-10"}});
         assert_eq!(sort_date(&m).as_deref(), Some("2023-01-10"));
+        let p = json!({"resourceType": "CarePlan", "subject": {"reference": "Patient/p1"}, "created": "2026-01-01", "period": {"start": "2026-01-05"}});
+        assert_eq!(person_of(&p).unwrap().as_deref(), Some("p1"));
+        assert_eq!(sort_date(&p).as_deref(), Some("2026-01-05"));
+        let q = json!({"resourceType": "QuestionnaireResponse", "subject": {"reference": "Patient/p1"}, "authored": "2026-01-04"});
+        assert_eq!(sort_date(&q).as_deref(), Some("2026-01-04"));
     }
 
     #[test]

@@ -3,6 +3,8 @@
 // fields this app does not show (from an import, say) are kept as they were.
 
 import { lists } from './lists.ts'
+import { fromObservation, isExerciseLog, isExercisePlan, showLog } from './explan.ts'
+import { advise, fromResponse, isReadiness } from './exrules.ts'
 import { isVital, show, vitalOf } from './vitals.ts'
 
 export type Resource = { resourceType: string; id?: string; [k: string]: unknown }
@@ -312,6 +314,19 @@ export const vital: Kind = {
   }),
 }
 
+export const exercise: Kind = {
+  type: 'Observation',
+  page: 'exercise',
+  match: (r) => isExerciseLog(r),
+  title: 'Exercise sessions',
+  one: 'an exercise session',
+  explain: 'Each exercise done or skipped, with how hard it felt and any pain. Logged on the Exercise page.',
+  base: {},
+  personField: 'subject',
+  fields: [],
+  summary: (r) => ({ title: text(r, 'code.text'), sub: showLog(fromObservation(r)), date: text(r, 'effectiveDateTime') }),
+}
+
 export const result: Kind = {
   type: 'Observation',
   page: 'results',
@@ -373,10 +388,36 @@ export function attachment(r: Resource) {
   }
 }
 
-export const kinds = [condition, medication, allergy, procedure, vaccine, vital, symptom, result, document]
+export const exercisePlan: Kind = {
+  type: 'CarePlan',
+  page: 'exercise',
+  match: (r) => isExercisePlan(r),
+  title: 'Exercise plans',
+  one: 'an exercise plan',
+  explain: 'The exercise plan made on the Exercise page.',
+  base: {},
+  personField: 'subject',
+  fields: [],
+  summary: (r) => ({ title: text(r, 'title') || 'Exercise plan', sub: text(r, 'description'), date: text(r, 'period.start') }),
+}
+
+export const readiness: Kind = {
+  type: 'QuestionnaireResponse',
+  page: 'exercise',
+  match: (r) => isReadiness(r),
+  title: 'Exercise readiness checks',
+  one: 'an exercise readiness check',
+  explain: 'Answers to the questions asked before an exercise plan.',
+  base: {},
+  personField: 'subject',
+  fields: [],
+  summary: (r) => ({ title: 'Exercise readiness check', sub: advise(fromResponse(r)).title, date: text(r, 'authored') }),
+}
+
+export const kinds = [condition, medication, allergy, procedure, vaccine, vital, symptom, exercise, result, document]
 /** The kind a record belongs to. Results take any Observation that is not
- *  a vital sign or a symptom. */
-export const kindOf = (r: Resource) => [patient, ...kinds].find((k) => k.type === r.resourceType && (!k.match || k.match(r)))
+ *  a vital sign, a symptom or an exercise session. */
+export const kindOf = (r: Resource) => [patient, ...kinds, exercisePlan, readiness].find((k) => k.type === r.resourceType && (!k.match || k.match(r)))
 
 // ---- results ----
 
