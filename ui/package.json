@@ -13,13 +13,13 @@
     "./base.css": "./src/base.css"
   },
   "peerDependencies": {
-    "svelte": "^5.57.2"
+    "svelte": "^5.58.0"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.8",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource-variable/space-grotesk": "^5.2.8",
-    "@lucide/svelte": "^1.64.0"
+    "@lucide/svelte": "^1.77.0"
   }
 }
